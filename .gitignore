@@ -1,3 +1,7 @@
+#Custom 
+pgdb/
+media/
+
 # Byte-compiled / optimized / DLL files
 .DS_Store
 __pycache__/

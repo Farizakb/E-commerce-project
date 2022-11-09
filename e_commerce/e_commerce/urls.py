@@ -16,10 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+from product.views import CategoriesView
+
 urlpatterns = [
     path('', include('core.urls')),
-    path('blogs', include('blog.urls')),
-    path('orders', include('order.urls')),
-    path('account', include('account.urls')),
+    path('blogs/', include('blog.urls')),
+    path('products/', include('product.urls')),
+    path('orders/', include('order.urls')),
+    path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
-]
+    
+    path('categories/', CategoriesView.as_view(), name='categories' ),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+

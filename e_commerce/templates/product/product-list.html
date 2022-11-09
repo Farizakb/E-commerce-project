@@ -1,0 +1,594 @@
+{% extends 'base.html' %}
+		{% block content %}
+        <!-- header section end -->
+        <!-- pages-title-start -->
+		<div class="pages-title section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="pages-title-text text-center">
+							<h2>Product List View</h2>
+							<ul class="text-left">
+								<li><a href="{% url 'home' %}">Home </a></li>
+								<li><span> // </span>Shop</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- pages-title-end -->
+        <!-- collection section start -->
+		<section class="collection-area collection-area2 section-padding">
+			<div class="container">
+				<div class="row">
+				{% for dis_pro in  discount_products %}
+					<div class="col-sm-4">
+						<div class="collect-img banner single-colect">
+							<a href="{% url 'product_detail' dis_pro.slug %}">
+								{% if dis_pro.product_image.first.is_main %}
+								<img src="{{dis_pro.product_image.first.path.url}}" alt="" />
+								{% endif %}
+							</a>
+						</div>
+						<div class="colect-text ">
+							<h3>{{dis_pro.title}}</h3>
+							{% if dis_pro.short_description  %}
+							<p>{{dis_pro.short_description}}</p>
+							{% endif %}
+							<a href="{% url 'product_detail' dis_pro.slug %}">Shop Now <i class="mdi mdi-arrow-right"></i></a>
+						</div>
+					</div>
+				{% endfor %}	
+				</div>
+			</div>
+		</section>
+		<!-- collection section end -->
+		<!-- product-list-view content section start -->
+		<section class="pages products-page section-padding-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-3">
+						<div class="sidebar left-sidebar">
+							<div class="s-side-text">
+								<div class="sidebar-title clearfix">
+									<h4 class="floatleft">Categories</h4>
+									<h5 class="floatright"><a href="{% url 'categories' %}">All</a></h5>
+								</div>
+								<div class="categories left-right-p">
+									<ul id="accordion" class="panel-group clearfix">
+										{% for category in categories %}
+										<li class="panel">
+											<div data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{category.id}}">
+												<div class="medium-a">
+													{{category.name}}
+												</div>
+											</div>
+											<div class="panel-collapse collapse in" id="collapse{{category.id}}">
+												<div class="normal-a">
+													{% for cat in category.subcategory.all %}
+													
+													<a href="#">{{cat.name}}</a>
+													
+													{% endfor %}
+												</div>
+											</div>
+										</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+							{% comment %} <div class="s-side-text">
+								<div class="sidebar-title">
+									<h4>price</h4>
+								</div>
+								<div class="range-slider clearfix">
+									<form action="#" method="get">
+										<label><span>You range</span> <input type="text" id="amount" readonly /></label>
+										<div id="slider-range"></div>
+									</form>
+								</div>
+							</div> {% endcomment %}
+							{% for property in properties %}
+							<div class="s-side-text">
+								<div class="sidebar-title clearfix">
+									<h4 class="floatleft">{{property.title}}</h4>
+									<h5 class="floatright"><a href="#">All</a></h5>
+								</div>
+								<div class="size-select clearfix">
+									{% for value in property.property_value.all %}
+										<a href="#">{{value.title}}</a>
+									{% endfor %}
+								</div>
+							</div>
+							{% endfor %}
+							{% comment %} <div class="s-side-text">
+								<div class="sidebar-title clearfix">
+									<h4 class="floatleft">color</h4>
+									<h5 class="floatright"><a href="#">All</a></h5>
+								</div>
+								<div class="color-select clearfix">
+									<span></span>
+									<span></span>
+									<span class="outline"></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+							</div> {% endcomment %}
+							
+							
+							
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-9">
+						<div class="right-products">
+							{% comment %} <div class="row">
+								<div class="col-xs-12">
+									<div class="section-title clearfix">
+										<ul>
+											<li>
+												<ul class="nav-view">
+													<li><a data-toggle="tab" href="#grid"> <i class="mdi mdi-view-module"></i> </a></li>
+													<li class="active"><a data-toggle="tab" href="#list"> <i class="mdi mdi-view-list"></i> </a></li>
+												</ul>
+											</li>
+											<li class="sort-by floatright">
+												Showing 1-9 of 89 Results
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div> {% endcomment %}
+							<div class="row">
+								<div class="tab-content grid-content">
+									{% comment %} <div class="tab-pane fade in text-center" id="grid">
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<div class="pro-type">
+														<span>new</span>
+													</div>
+													<a href="#"><img src="img/products/9.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s Black t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$65.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<div class="pro-type sell">
+														<span>sell</span>
+													</div>
+													<a href="#"><img src="img/products/2.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s White t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$65.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<div class="pro-type">
+														<span>-15</span>
+													</div>
+													<a href="#"><img src="img/products/8.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s Black t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$65.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<a href="#"><img src="img/products/12.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s Grey t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$66.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<a href="#"><img src="img/products/13.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s White t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$95.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<a href="#"><img src="img/products/11.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s Black t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$45.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<a href="#"><img src="img/products/14.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s Black t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$85.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<div class="pro-type">
+														<span>new</span>
+													</div>
+													<a href="#"><img src="img/products/15.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s White t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$55.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+										<div class="col-xs-12 hidden-sm col-md-4">
+											<div class="single-product">
+												<div class="product-img">
+													<a href="#"><img src="img/products/10.jpg" alt="Product Title" /></a>
+													<div class="actions-btn">
+														<a href="#"><i class="mdi mdi-cart"></i></a>
+														<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+														<a href="#"><i class="mdi mdi-heart"></i></a>
+													</div>
+												</div>
+												<div class="product-dsc">
+													<p><a href="#">men’s Black t-shirt</a></p>
+													<div class="ratting">
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+													<span>$55.20</span>
+												</div>
+											</div>
+										</div>
+										<!-- single product end -->
+									</div> {% endcomment %}
+									<div class="tab-pane fade active in" id="list">
+										<div class="col-xs-12">
+										{% for product in products %}
+											<div class="single-list-view">
+												<div class="row">
+													<div class="col-xs-12 col-md-4">
+														<div class="list-img">
+															<div class="product-img">
+																<div class="pro-type sell">
+																	<span>sell</span>
+																</div>
+																<a href="{% url 'product_detail' product.slug %}"><img src="{{product.product_image.first.path.url}}" alt="Product Title" /></a>
+															</div>
+														</div>
+													</div>
+													<div class="col-xs-12 col-md-8">
+														<div class="list-text">
+															<a href="{% url 'product_detail' product.slug %}"><h3>{{product.title}}</h3></a>
+															<span>Summer men’s fashion</span>
+															<div class="ratting floatright">
+																<p>( 27 Rating )</p>
+																<i class="mdi mdi-star"></i>
+																<i class="mdi mdi-star"></i>
+																<i class="mdi mdi-star"></i>
+																<i class="mdi mdi-star-half"></i>
+																<i class="mdi mdi-star-outline"></i>
+															</div>
+															{% if product.discounts %}
+																<h5><del>{{product.price}}$</del> {{product.calculated_value}}$</h5>
+															{% else %}
+																<h5>{{product.price}} $</h5>
+															{% endif %}
+
+
+															{% if product.short_description %}
+															<p>{{product.short_description}}</p>
+															{% endif %}
+															<div class="list-btn">
+																<a href="#">add to cart</a>
+																<a href="#">wishlist</a>
+																<a href="#" data-toggle="modal" data-target="#quick-view">zoom</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										{% endfor %}
+										<!-- single product end -->
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<span class="step-links">
+										
+									</span>
+									<div class="pagnation-ul">
+										{% if page_obj.has_previous %}
+											<a href="?page=1">&laquo; first </a>
+											<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+										{% endif %}
+										<ul class="clearfix ">
+											<span class="current">
+												<h5>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</h5>
+											</span>
+										</ul>
+										{% if page_obj.has_next %}
+											<a href="?page={{ page_obj.next_page_number }}">next</a>
+											<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- product-list-view content section end -->
+        <!-- quick view start -->
+		<div class="product-details quick-view modal animated zoomInUp" id="quick-view">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="d-table">
+							<div class="d-tablecell">
+								<div class="modal-dialog">
+									<div class="main-view modal-content">
+										<div class="modal-footer" data-dismiss="modal">
+											<span>x</span>
+										</div>
+										<div class="row">
+											<div class="col-xs-12 col-sm-5 col-md-4">
+												<div class="quick-image">
+													<div class="single-quick-image text-center">
+														<div class="list-img">
+															<div class="product-img tab-content">
+																<div class="simpleLens-container tab-pane fade in" id="q-sin-1">
+																	<div class="pro-type">
+																		<span>new</span>
+																	</div>
+																	<a class="simpleLens-image" data-lens-image="img/products/z1.jpg" href="#"><img src="img/products/z1.jpg" alt="" class="simpleLens-big-image"></a>
+																</div>
+																<div class="simpleLens-container tab-pane active fade in" id="q-sin-2">
+																	<div class="pro-type sell">
+																		<span>sell</span>
+																	</div>
+																	<a class="simpleLens-image" data-lens-image="img/products/z2.jpg" href="#"><img src="{{product.product_image.first.path.url}}" alt="" class="simpleLens-big-image"></a>
+																</div>
+																<div class="simpleLens-container tab-pane fade in" id="q-sin-3">
+																	<div class="pro-type">
+																		<span>-15%</span>
+																	</div>
+																	<a class="simpleLens-image" data-lens-image="img/products/z3.jpg" href="#"><img src="img/products/z3.jpg" alt="" class="simpleLens-big-image"></a>
+																</div>
+																<div class="simpleLens-container tab-pane fade in" id="q-sin-4">
+																	<div class="pro-type">
+																		<span>new</span>
+																	</div>
+																	<a class="simpleLens-image" data-lens-image="img/products/z4.jpg" href="#"><img src="img/products/z4.jpg" alt="" class="simpleLens-big-image"></a>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="quick-thumb">
+														<ul class="product-slider">
+															<li><a data-toggle="tab" href="#q-sin-1"> <img src="img/products/s1.jpg" alt="quick view" /> </a></li>
+															<li class="active"><a data-toggle="tab" href="#q-sin-2"> <img src="img/products/s2.jpg" alt="small image" /> </a></li>
+															<li><a data-toggle="tab" href="#q-sin-3"> <img src="img/products/s3.jpg" alt="small image" /> </a></li>
+															<li><a data-toggle="tab" href="#q-sin-4"> <img src="img/products/s4.jpg" alt="small image" /> </a></li>
+														</ul>
+													</div>
+												</div>						
+											</div>
+											<div class="col-xs-12 col-sm-7 col-md-8">
+												<div class="quick-right">
+													<div class="list-text">
+														<h3>men’s White t-shirt</h3>
+														<span>Summer men’s fashion</span>
+														<div class="ratting floatright">
+															<p>( 27 Rating )</p>
+															<i class="mdi mdi-star"></i>
+															<i class="mdi mdi-star"></i>
+															<i class="mdi mdi-star"></i>
+															<i class="mdi mdi-star-half"></i>
+															<i class="mdi mdi-star-outline"></i>
+														</div>
+														<h5><del>$79.30</del> $69.30</h5>
+														<p>There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anything embarrassing hidden in the middle of text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+														<div class="all-choose">
+															<div class="s-shoose">
+																<h5>Color</h5>
+																<div class="color-select clearfix">
+																	<span></span>
+																	<span class="outline"></span>
+																	<span></span>
+																	<span></span>
+																</div>
+															</div>
+															<div class="s-shoose">
+																<h5>size</h5>
+																<div class="size-drop">
+																	<div class="btn-group">
+																		<button type="button" class="btn">XL</button>
+																		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																			<span class=""><i class="mdi mdi-chevron-down"></i></span>
+																		</button>
+																		<ul class="dropdown-menu">
+																			<li><a href="#">Xl</a></li>
+																			<li><a href="#">SL</a></li>
+																			<li><a href="#">S</a></li>
+																			<li><a href="#">L</a></li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+															<div class="s-shoose">
+																<h5>qty</h5>
+																<form action="#" method="POST">
+																	<div class="plus-minus">
+																		<a class="dec qtybutton">-</a>
+																		<input type="text" value="02" name="qtybutton" class="plus-minus-box">
+																		<a class="inc qtybutton">+</a>
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div class="list-btn">
+															<a href="#">add to cart</a>
+															<a href="#">wishlist</a>
+															<a href="#" data-toggle="modal" data-target="#quick-view">zoom</a>
+														</div>
+														<div class="share-tag clearfix">
+															<ul class="blog-share floatleft">
+																<li><h5>share </h5></li>
+																<li><a href="#"><i class="mdi mdi-facebook"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-twitter"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-vimeo"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-dribbble"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-instagram"></i></a></li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- quick view end -->
+        <!-- footer section start -->
+		{% endblock content %}

@@ -29,10 +29,10 @@
                                 </ul>
                             </li>
                         </ul>
-                        <div class="right floatright">
-                            <form action="#" method="get">
+                        <div class="right floatright widthfull">
+                            <form action="{% url 'products' %}" method="get">
                                 <button type="submit"><i class="mdi mdi-magnify"></i></button>
-                                <input type="text" placeholder="Search within these results..." />
+                                <input type="text" name='q' placeholder="Search within these results..." />
                             </form>
                         </div>
                     </div>

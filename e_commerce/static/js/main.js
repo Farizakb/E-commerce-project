@@ -14,7 +14,7 @@
 	})
 	//search bar exprnd
 	$('.header-top-two .right button').on('click',function(){
-		$('.header-top-two .right').toggleClass('widthfull');
+		$('.header-top-two .right').toggleClass('');
 	});
 	//search bar border color
 	$('.middel-top .center').on('click',function(){

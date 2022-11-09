@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,9 +43,14 @@ INSTALLED_APPS = [
     #Apps
     'core',
     'blog',
+    'product',
     'order',
     'account',
 ]
+
+
+# User
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,10 +90,17 @@ WSGI_APPLICATION = 'e_commerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'E_commerce',
+        'PASSWORD':12345,
+        'USER':'Fariz',
+        'PORT':5432,
+        'HOST':'localhost',
     }
 }
+
+
+AUTH_USER_MODEL = "account.User"
 
 
 # Password validation
@@ -129,6 +142,10 @@ STATICFILES_DIRS = [
     ]  
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
