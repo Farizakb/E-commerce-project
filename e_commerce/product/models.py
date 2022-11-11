@@ -7,11 +7,11 @@ from django.utils.text import slugify
 User = get_user_model()
 
 Star_review = (
-    (1,"1 Star"),
-    (2,"2 Star"),
-    (3,"3 Star"),
-    (4,"4 Star"),
-    (5,"5 Star"),
+    ('1',"1 Star"),
+    ('2',"2 Star"),
+    ('3',"3 Star"),
+    ('4',"4 Star"),
+    ('5',"5 Star"),
 )
    
 
@@ -93,7 +93,7 @@ class ProductComment(AbstractModel):
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'product_comment')
     products = models.ForeignKey(Product, on_delete = models.CASCADE, related_name = 'product_comment')
     
-    content = models.CharField(max_length = 100)
+    content = models.CharField(max_length = 255)
     review = models.CharField(max_length = 1, choices = Star_review)
     
             

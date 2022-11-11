@@ -165,27 +165,17 @@
 									{% endfor %}
 
 									
-								
+									
 									<div class="custom-input">
-										<form action="{% url 'product_detail' product.slug %}" method="post">
+										<form action="" method="post">
 											<div class="row">
-												<div class="col-sm-6">
-													<div class="input-mail">
-														<input type="text" name="name" placeholder="Your Name" />
-													</div>
+												
+												<div class="col-xs-12 ">
+													{% csrf_token %}
+													{{form}}
 												</div>
-												<div class="col-sm-6">
-													<div class="input-mail">
-														<input type="text" name="email" placeholder="Your Email" />
-													</div>
-												</div>
-												<div class="col-xs-12">
-													<div class="custom-mess">
-														<textarea name="message" placeholder="Your Review" rows="2"></textarea>
-													</div>
-												</div>
-												<div class="col-xs-12">
-													<div class="submit-text">
+												<div class="col-xs-12" style="margin-top: 20px;">
+													<div class="submit-text" >
 														<button  type="submit">submit review</button>
 													</div>
 												</div>

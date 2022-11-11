@@ -1,4 +1,5 @@
 {% load static %}
+{% load contact_tag %}
 <footer class="footer-two">
     <!-- brand logo area start -->
     <div class="brand-logo">
@@ -24,6 +25,12 @@
                 <div class="col-sm-6">
                     <div class="newsletter newsletter2">
                         <h3>newsletter</h3>
+                        
+                       
+                        
+
+
+
                         <form action="mail.php" method="post">
                             <input type="text" name="email" placeholder="Enter your email..."/>
                             <input type="submit" value="subscribe"/>
@@ -40,11 +47,12 @@
                 <div class="col-sm-6 col-md-offset-1 col-md-5">
                     <div class="newsletter get-touch">
                         <h3>get in touch</h3>
-                        <form action="mail.php" method="post">
-                            <input type="text" name="name" placeholder="Enter your Name..."/>
-                            <input type="text" name="email" placeholder="Enter your email..."/>
-                            <textarea name="message" rows="2" placeholder="Enter your message...."></textarea>
-                            <input type="submit" value="send your message"/>
+                        <form action="{% url 'contact' %}" method="post">
+                            {% get_contact as form  %}
+                            {% csrf_token %}
+                            {{form}}
+                            
+                            <input class='btn btn-primary' type="submit" value="send your message"/>
                         </form>
                     </div>
                 </div>

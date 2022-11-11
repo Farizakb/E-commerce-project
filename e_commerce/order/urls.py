@@ -1,5 +1,6 @@
 from django.urls import path
-from . import views
+from .views import ShippingView
 
 urlpatterns = [
+    path('shipping_adress', ShippingView.as_view(), name='shipping_adress')
 ]
