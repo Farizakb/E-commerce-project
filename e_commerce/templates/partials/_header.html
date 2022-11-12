@@ -9,14 +9,21 @@
                             <p><i class="mdi mdi-clock"></i> Mon-Fri : 09:00-19:00</p>
                         </div>
                     </div>
+                    {% if user.is_authenticated %}
+                        <h3>{{user.username}}</h3>
+                    {% endif %}
+
                     <div class="middel-top clearfix">
                         <ul class="clearfix right floatright">
                             <li>
                                 <a href="#"><i class="mdi mdi-account"></i></a>
                                 <ul>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="login.html">Registar</a></li>
-                                    <li><a href="my-account.html">My account</a></li>
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'login' %}">Register</a></li>
+                                    <li><a href="{% url 'profile' %}">My account</a></li>
+                                    <hr>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                   
                                 </ul>
                             </li>
                             <li>

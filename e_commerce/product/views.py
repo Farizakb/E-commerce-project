@@ -20,7 +20,8 @@ class ProductView(ListView):
         if query_q:
             quey_q_set = query_q.split(' ')
             queryset = queryset.filter(title__icontains = quey_q_set[0])
-            queryset = queryset.filter(title__icontains = quey_q_set[1])
+            if len(quey_q_set) > 1:
+                queryset = queryset.filter(title__icontains = quey_q_set[1])
         return queryset.order_by('-created_at')
     
     def get_context_data(self, **kwargs):

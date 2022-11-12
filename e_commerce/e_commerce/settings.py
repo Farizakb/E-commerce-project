@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'product',
     'order',
     'account',
+    
+    
+    #Third-party
+    'social_django',
 ]
 
 
@@ -60,7 +64,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'e_commerce.middlewares.black_list.BlackListMiddleware',
 ]
+WSGI_APPLICATION = 'e_commerce.wsgi.application'
 
 ROOT_URLCONF = 'e_commerce.urls'
 
@@ -77,12 +83,17 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'e_commerce.wsgi.application'
+
+
+
+
 
 
 # Database
@@ -100,7 +111,33 @@ DATABASES = {
 }
 
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '5652991374-j9m7s8eui32bh3crbda33pvviphljij7.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
+
+
 AUTH_USER_MODEL = "account.User"
+
+
+
+LOGIN_URL = '/account/login'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/account/login'
+
+
+
 
 
 # Password validation
@@ -151,3 +188,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'farizakb090@gmail.com'
+EMAIL_HOST_PASSWORD = 'sroueugwkdrzghes'

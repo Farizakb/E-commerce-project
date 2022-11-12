@@ -39,3 +39,6 @@ class BlogComment(AbstractModel):
     
     def __str__(self) -> str:
         return f'{self.author}-->{self.content}'
+    
+    
+   
