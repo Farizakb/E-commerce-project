@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # 'modeltranslation',
+    
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,6 +52,9 @@ INSTALLED_APPS = [
     
     #Third-party
     'social_django',
+    'rest_framework',
+    'django_filters',
+    
 ]
 
 
@@ -64,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'e_commerce.middlewares.black_list.BlackListMiddleware',
 ]
 WSGI_APPLICATION = 'e_commerce.wsgi.application'
@@ -161,6 +167,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
+
+LOCALE_PATHS = (
+    BASE_DIR / 'locale',
+)
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('az','Azerbaijan'),
+    ('ru', 'Russian'),
+)
+
+LANGUAGE_CODE = 'en-us' 'az' 'ru'
+
 
 LANGUAGE_CODE = 'en-us'
 

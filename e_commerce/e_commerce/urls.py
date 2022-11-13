@@ -18,19 +18,29 @@ from django.urls import path,include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 from product.views import CategoriesView
 
 urlpatterns = [
-    path('', include('core.urls')),
-    path('blogs/', include('blog.urls')),
-    path('products/', include('product.urls')),
-    path('orders/', include('order.urls')),
-    path('account/', include('account.urls')),
+
     path('admin/', admin.site.urls),
     
     path('categories/', CategoriesView.as_view(), name='categories' ),
     
     path('', include('social_django.urls', namespace='social')),
+    path('i18n/', include('django.conf.urls.i18n')),
+    
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
+
+
+urlpatterns += i18n_patterns(
+    path('', include('core.urls')),
+    path('blogs/', include('blog.urls')),
+    path('products/', include('product.urls')),
+    path('orders/', include('order.urls')),
+    path('account/', include('account.urls')),
+    path('api/', include('api.urls')),
+    
+)
