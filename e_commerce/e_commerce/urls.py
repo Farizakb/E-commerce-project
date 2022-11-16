@@ -23,9 +23,9 @@ from django.conf.urls.i18n import i18n_patterns
 from product.views import CategoriesView
 
 urlpatterns = [
+    path('api/', include('api.urls')),
 
     path('admin/', admin.site.urls),
-    
     path('categories/', CategoriesView.as_view(), name='categories' ),
     
     path('', include('social_django.urls', namespace='social')),
@@ -41,6 +41,5 @@ urlpatterns += i18n_patterns(
     path('products/', include('product.urls')),
     path('orders/', include('order.urls')),
     path('account/', include('account.urls')),
-    path('api/', include('api.urls')),
     
 )

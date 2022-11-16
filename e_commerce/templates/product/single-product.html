@@ -13,6 +13,11 @@
 								<li><a href="{% url 'home' %}">Home </a></li>
 								<li><span> // </span><a href="{% url 'products' %}">shop </a></li>
 								<li><span> // </span>{{product.title}}</li>
+								{{product.id}}
+								{{product.pk}}
+								{{product.slug}}
+								<a href="{% url 'product_api' product.pk %}"> Api</a>
+
 							</ul>
 						</div>
 					</div>

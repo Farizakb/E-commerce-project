@@ -14,7 +14,6 @@
                         <h3>{{user.username}}</h3>
                     {% endif %}
 
-
                     <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}" />
@@ -82,13 +81,13 @@
                     <div class="mainmenu">
                         <nav>
                             <ul>
-                                <li><a href="index.html">Home</a>
+                                <li><a href="{% url 'home' %}">Home</a>
                                     <ul class="dropdown">
                                         <li><a href="index.html">Home version one</a></li>
                                         <li><a href="index-2.html">Home version two</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="shop.html">Shop</a>
+                                <li><a href="{% url 'products' %}">Shop</a>
                                     <ul class="magamenu">
                                         <li class="banner"><a href="shop.html"><img src="{% static 'img/maga1.png' %} " alt="" /></a></li>
                                         <li><h5>men’s wear</h5>
@@ -129,7 +128,7 @@
                                         <li><a href="error-404.html">404 page</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="blog.html">Blog</a>
+                                <li><a href="{% url 'blogs' %}">Blog</a>
                                     <ul class="dropdown">
                                         <li><a href="blog-style-1.html">Blog Style One</a></li>
                                         <li><a href="blog-style-2.html">Blog Style Two</a></li>
@@ -137,7 +136,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="about.html">About</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{% url 'contact' %}">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -146,13 +145,13 @@
                         <div class="mobile-menu">
                             <nav id="dropdown">
                                 <ul>
-                                    <li><a href="index.html">Home</a>
+                                    <li><a href="{% url 'home' %}">Home</a>
                                         <ul class="dropdown">
                                             <li><a href="index.html">Home version one</a></li>
                                             <li><a href="index-2.html">Home version two</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="shop.html">Shop</a>
+                                    <li><a href="{% url 'products' %}">Shop</a>
                                         <ul>
                                             <li><h5>men’s wear</h5>
                                                 <ul>
@@ -191,7 +190,7 @@
                                             <li><a href="error-404.html">404 page</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog.html">Blog</a>
+                                    <li><a href="{% url 'blogs' %}">Blog</a>
                                         <ul>
                                             <li><a href="blog-style-1.html">Blog Style One</a></li>
                                             <li><a href="blog-style-2.html">Blog Style Two</a></li>
@@ -199,7 +198,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -208,33 +207,19 @@
             </div>
             <div class="col-sm-2">
                 <div class="cart-itmes">
-                    <a class="cart-itme-a" href="cart.html">
-                        <i class="mdi mdi-cart"></i>
-                        02 items :  <strong>$86.00</strong>
+                    <a id="cart_show" class="cart-itme-a" href="{% url 'cart' %}">
+                       
                     </a>
                     <div class="cartdrop">
-                        <div class="sin-itme clearfix">
-                            <i class="mdi mdi-close"></i>
-                            <a class="cart-img" href="cart.html"><img src="{% static 'img/cart/1.png' %} " alt="" /></a>
-                            <div class="menu-cart-text">
-                                <a href="#"><h5>men’s black t-shirt</h5></a>
-                                <span>Color :  Black</span>
-                                <span>Size :     SL</span>
-                                <strong>$122.00</strong>
-                            </div>
+                        <div id="basket" class="items">
+                            
+
+
                         </div>
-                        <div class="sin-itme clearfix">
-                            <i class="mdi mdi-close"></i>
-                            <a class="cart-img" href="cart.html"><img src="{% static 'img/cart/2.png' %} " alt="" /></a>
-                            <div class="menu-cart-text">
-                                <a href="#"><h5>men’s black t-shirt</h5></a>
-                                <span>Color :  Black</span>
-                                <span>Size :     SL</span>
-                                <strong>$132.00</strong>
-                            </div>
-                        </div>
-                        <div class="total">
-                            <span>total <strong>= $306.00</strong></span>
+
+                        <div id="total" class="total">
+
+                            
                         </div>
                         <a class="goto" href="cart.html">go to cart</a>
                         <a class="out-menu" href="checkout.html">Check out</a>

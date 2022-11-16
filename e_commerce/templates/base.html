@@ -1431,6 +1431,14 @@
         <script src="{% static 'js/plugins.js' %} "></script>
 		<!-- main js -->
         <script src="{% static 'js/main.js' %} "></script>
+
+		<script src="{% static 'js/cart.js' %} "></script>
+
+
+		<script type="text/javascript">
+
+			var user = '{{request.user}}'
+		</script>
         {% block js %}
         {% endblock js %}
     </body>

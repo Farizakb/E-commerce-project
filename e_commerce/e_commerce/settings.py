@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'django_filters',
+    'corsheaders',
+    
     
 ]
 
@@ -64,6 +66,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,6 +78,16 @@ MIDDLEWARE = [
 WSGI_APPLICATION = 'e_commerce.wsgi.application'
 
 ROOT_URLCONF = 'e_commerce.urls'
+
+CORS_ORIGIN_ALLOW_ALL=True
+
+
+
+
+
+
+
+
 
 TEMPLATES = [
     {
@@ -121,6 +134,17 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ),
+    
+#     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+# }
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '5652991374-j9m7s8eui32bh3crbda33pvviphljij7.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
