@@ -10,7 +10,7 @@
 						<div class="pages-title-text text-center">
 							<h2>Cart</h2>
 							<ul class="text-left">
-								<li><a href="index.html">Home </a></li>
+								<li><a href="{% url 'home' %}">Home </a></li>
 								<li><span> // </span>Cart</li>
 							</ul>
 						</div>
@@ -36,78 +36,33 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="td-img text-left">
-											<a href="#"><img src="img/cart/1.png" alt="Add Product" /></a>
-											<div class="items-dsc">
-												<h5><a href="#">men’s black t-shirt</a></h5>
-												<p class="itemcolor">Color : <span>Blue</span></p>
-												<p class="itemcolor">Size   : <span>SL</span></p>
-											</div>
-										</td>
-										<td>$56.00</td>
-										<td>
-											<form action="#" method="POST">
-												<div class="plus-minus">
-													<a class="dec qtybutton">-</a>
-													<input type="text" value="02" name="qtybutton" class="plus-minus-box">
-													<a class="inc qtybutton">+</a>
+									{% for item in items %}
+										<tr>
+											<td class="td-img text-left">
+												<a href="#"><img src="{{item.product.product_image.first.path.url}}" alt="Add Product" /></a>
+												<div class="items-dsc">
+													<h5><a href="#">{{item.product.title}}</a></h5>
+													<p class="itemcolor">Color : <span>Blue</span></p>
+													<p class="itemcolor">Size   : <span>SL</span></p>
 												</div>
-											</form>
-										</td>
-										<td>
-											<strong>$112.00</strong>
-										</td>
-										<td><i class="mdi mdi-close" title="Remove this product"></i></td>
-									</tr>
-									<tr>
-										<td class="td-img text-left">
-											<a href="#"><img src="img/cart/2.png" alt="Add Product" /></a>
-											<div class="items-dsc">
-												<h5><a href="#">men’s white t-shirt</a></h5>
-												<p class="itemcolor">Color : <span>Blue</span></p>
-												<p class="itemcolor">Size   : <span>SL</span></p>
-											</div>
-										</td>
-										<td>$56.00</td>
-										<td>
-											<form action="#" method="POST">
-												<div class="plus-minus">
-													<a class="dec qtybutton">-</a>
-													<input type="text" value="02" name="qtybutton" class="plus-minus-box">
-													<a class="inc qtybutton">+</a>
-												</div>
-											</form>
-										</td>
-										<td>
-											<strong>$112.00</strong>
-										</td>
-										<td><i class="mdi mdi-close" title="Remove this product"></i></td>
-									</tr>
-									<tr>
-										<td class="td-img text-left">
-											<a href="#"><img src="img/cart/3.png" alt="Add Product" /></a>
-											<div class="items-dsc">
-												<h5><a href="#">men’s white t-shirt</a></h5>
-												<p class="itemcolor">Color : <span>Blue</span></p>
-												<p class="itemcolor">Size   : <span>SL</span></p>
-											</div>
-										</td>
-										<td>$56.00</td>
-										<td>
-											<form action="#" method="POST">
-												<div class="plus-minus">
-													<a class="dec qtybutton">-</a>
-													<input type="text" value="02" name="qtybutton" class="plus-minus-box">
-													<a class="inc qtybutton">+</a>
-												</div>
-											</form>
-										</td>
-										<td>
-											<strong>$112.00</strong>
-										</td>
-										<td><i class="mdi mdi-close" title="Remove this product"></i></td>
-									</tr>
+											</td>
+											<td>${{item.product.price}}</td>
+											<td>
+												<form action="#" method="POST">
+													<div class="plus-minus">
+														<a class="dec qtybutton">-</a>
+														<input type="text" value="{{item.count}}" name="qtybutton" class="plus-minus-box">
+														<a class="inc qtybutton">+</a>
+													</div>
+												</form>
+											</td>
+											<td>
+												<strong>${{item.get_total}}</strong>
+											</td>
+											<td><i class="mdi mdi-close" title="Remove this product"></i></td>
+										</tr>
+									{% endfor %}
+								
 								</tbody>
 							</table>
 						</div>

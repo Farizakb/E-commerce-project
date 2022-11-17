@@ -147,7 +147,7 @@
                                 <ul>
                                     <li><a href="{% url 'home' %}">Home</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home version one</a></li>
+                                            <li><a href="{% url 'home' %}">Home version one</a></li>
                                             <li><a href="index-2.html">Home version two</a></li>
                                         </ul>
                                     </li>
@@ -183,9 +183,9 @@
                                         <ul>
                                             <li><a href="wishlist.html">Wishlist</a></li>
                                             <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="{% url 'cart' %}">Cart</a></li>
                                             <li><a href="product-grid.html">Product Grid View</a></li>
-                                            <li><a href="product-list.html">Product List View</a></li>
+                                            <li><a href="{% url 'products' %}">Product List View</a></li>
                                             <li><a href="single-product.html">Single Product</a></li>
                                             <li><a href="error-404.html">404 page</a></li>
                                         </ul>
@@ -221,7 +221,7 @@
 
                             
                         </div>
-                        <a class="goto" href="cart.html">go to cart</a>
+                        <a class="goto" href="{% url 'cart' %}">go to cart</a>
                         <a class="out-menu" href="checkout.html">Check out</a>
                     </div>
                 </div>
