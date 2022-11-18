@@ -3,6 +3,29 @@ version: '3.1'
 
 services:
 
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - ./static/:/code/static/ 
+      - ./media/:/code/media/
+
+
+  web:
+    build: .
+    ports:
+      - 8001:8000
+    volumes:
+      - ./static:/code/static
+      - ./media:/code/media
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - "db"
+    env_file:
+      - .env
 
 
 
@@ -13,17 +36,10 @@ services:
       - ./pgdb:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    environment:
-      POSTGRES_PASSWORD: 12345
-      POSTGRES_USER: Fariz
-      POSTGRES_DB: E_commerce
+    env_file:
+      - .env
 
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
 
 
   redisdb:
@@ -31,41 +47,28 @@ services:
     ports:
       - 6379:6379
 
+  celery:
+    build: . 
+      # context: .
+      # dockerfile: celery.dockerfile
+    volumes:
+      - ./media:/code/media
+    command: celery -A e_commerce worker -l info -P gevent
+    depends_on:
+      - "db"
+      - "redisdb"
+    env_file:
+      - .env
 
-
-  # nginx:
-  #   build: ./nginx
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - web
-  #   volumes:
-  #     - ./static/:/code/static/ 
-  #     - ./media/:/code/media/
-
-
-
-
-  # web:
-  #   build: . 
-  #   ports:
-  #     - "8001:8000"
-  #   volumes:
-  #     - ./media:/code/media
-  #   depends_on:
-  #     - "db"
-  #   env_file:
-  #     - .env
-
-  # celery:
-  #   build: . 
-  #   ports:
-  #     - "8001:8000"
-  #   volumes:
-  #     - ./media:/code/media
-  #   depends_on:
-  #     - "db"
-  #   env_file:
-  #     - .env
-
-
+  celery-beat:
+    build: . 
+      # context: .
+      # dockerfile: celery.dockerfile
+    volumes:
+      - ./media:/code/media
+    command: celery -A e_commerce  beat -l info -S django
+    depends_on:
+      - "db"
+      - "redisdb"
+    env_file:
+      - .env

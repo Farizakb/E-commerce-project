@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!h(*$a7l)$t83k&9(w%!n13&%4r)@7(42l96zsk8%22)ug482w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False  if os.environ.get("DEBUG") else True 
+PROD = not DEBUG
 ALLOWED_HOSTS = ['*']
 
 
@@ -87,8 +88,8 @@ CORS_ORIGIN_ALLOW_ALL=True
 
 
 
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_BROKER_URL = f"redis://{os.environ.get('REDIS_HOST','localhost')}:6379"
+CELERY_RESULT_BACKEND = f"redis://{os.environ.get('REDIS_HOST','localhost')}:6379"
 CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_TIMEZONE = "Asia/Baku"
 
@@ -129,8 +130,9 @@ DATABASES = {
         'NAME': 'E_commerce',
         'PASSWORD':12345,
         'USER':'Fariz',
-        'PORT':5432,
-        'HOST':'localhost',
+        'PORT':os.environ.get('POSTGRES_PORT','5433'),
+        'HOST': os.environ.get('POSTGRES_HOST','localhost'),
+
     }
 }
 
@@ -222,7 +224,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATICFILES_DIRS = [
+if PROD:
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    STATICFILES_DIRS = [
         BASE_DIR / 'static',    
     ]  
 
@@ -244,4 +249,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'farizakb090@gmail.com'
-EMAIL_HOST_PASSWORD = 'sroueugwkdrzghes'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS',''),
