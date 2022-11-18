@@ -28,9 +28,7 @@ class CartView(TemplateView):
         
         if self.request.user.is_authenticated:
             customer = self.request.user.customer
-            print(customer)
             order, created = Basket.objects.get_or_create(customer = customer, status = False)
-            print(created)
             context['items'] = order.basket_item.all()
             
         else:

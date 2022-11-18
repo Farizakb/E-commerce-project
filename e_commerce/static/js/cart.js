@@ -6,6 +6,7 @@ document.addEventListener('readystatechange', event => {
     }
     if (event.target.readyState === "complete") {
         remove_cartItem()
+        
     }
 })
 
@@ -13,6 +14,7 @@ document.addEventListener('readystatechange', event => {
 
 var uptadeBtns = document.getElementsByClassName('update-cart')
 console.log(uptadeBtns.length);
+
 for(var i = 0; i < uptadeBtns.length; i++){
     uptadeBtns[i].addEventListener('click', function(){
         var productId = this.dataset.product

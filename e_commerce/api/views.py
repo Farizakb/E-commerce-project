@@ -81,8 +81,12 @@ class BasketApiView(APIView):
         
             customer = Customer.objects.get(user__username = user)
             product = Product.objects.get(id = product_id)
-            basket, maked = Basket.objects.get_or_create(customer = customer, status =False)
+            basket, maked = Basket.objects.get_or_create(customer = customer, status = False)
+            print(maked)
+            
             basket_item, created= Basketİtem.objects.get_or_create(basket = basket, product = product, count = 1)
+            print(created)
+            
             if created:
                 basket_item.save()
             else:
